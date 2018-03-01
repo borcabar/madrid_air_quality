@@ -6,10 +6,15 @@ In the front:
 3- Analysis, with several dashboards, of the pollution in madrid
 
 In the back:
-1- Server from DigitalOcean asking as client every day for the new data of pollution and weather.
+1- Server from DigitalOcean asking as client for the new data of pollution (monthly) and weather(daily).
 2- Algorithm to make the calculation
 3- Connection to tableau to show the dashboard
 4- Connection to carto to make the iamges.
+
+In the mathematics
+1- Modelling the evolution of the pollution in the stations to predict its behaviour for a whole month, maybe an ARIMA model
+2- Modelling the pollution in every point taking into account the weather, the proximity to streets, the nature of the day 
+(day of the week, vacation time, holyday, etc...). This will be quit challenging:
 
 
 The data:
