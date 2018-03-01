@@ -1,0 +1,25 @@
+Elements of the application:
+
+In the front:
+1- Dash board of pollution in madrid, customizable to a point, maybe a neigborhood.
+2- webpage explaining the process to make the former calculation
+3- Analysis, with several dashboards, of the pollution in madrid
+
+In the back:
+1- Server from DigitalOcean asking as client every day for the new data of pollution and weather.
+2- Algorithm to make the calculation
+3- Connection to tableau to show the dashboard
+4- Connection to carto to make the iamges.
+
+
+The data:
+- For the pollution in MAdrid should access:
+https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=aecb88a7e2b73410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD
+
+- Maybe, the dayli data could came from:
+https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=f3c0f7d512273410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default
+
+
+- Portal of the major showing the same it is mean to be done here:
+http://www.mambiente.munimadrid.es/opencms/opencms/calaire/index.html
+
