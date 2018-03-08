@@ -33,3 +33,22 @@ https://opendata.aemet.es/centrodedescargas/inicio
 
 - A description of the air's measurement in amdrid is found here:
 http://www.mambiente.munimadrid.es/opencms/opencms/calaire/SistemaIntegral/SistVigilancia/Estaciones/
+
+
+After talk with professor Mario Castro, there was two good ideas to implement.
+
+- Consider that the wind speed will determine the noise of the system, the noise ~ distribution (mean=0, sigma=f(wind_speed)); 
+the explanation is the wind will alter the distribution of pollutants and an option is to associated to the noise.
+
+- Use a kernel interpolation function, his original proposal is to use the pollutants measures as the peak of paraboliod, 
+that would gave a shape of the surface of pollutants concentration in MAdrid, but... assuming that the main sources of air pollutants 
+are calefaction boilersin houses (while winter) and cars. So a better option seems to use the road and density of houses in a place 
+to make this surface and use the pollutants measures to calibrate the shape ot the surface; if kernel functions applied over dots 
+(roads transformed to dots with contant separation, and given the car flux the high and the wide of the paraboloid, while considering 
+better an horizontal plane depending of the density of the neigborhoud.
+
+- If the lastest is implemented the summer will give and excellent opportunity to calibrate the influence of cars, ignoring the 
+effect of heating systems.
+
+
+
