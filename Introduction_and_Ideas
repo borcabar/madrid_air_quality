@@ -39,6 +39,16 @@ https://opendata.aemet.es/centrodedescargas/inicio
 - A description of the air's measurement in amdrid is found here:
 http://www.mambiente.munimadrid.es/opencms/opencms/calaire/SistemaIntegral/SistVigilancia/Estaciones/
 
+- Dataset of the traffic in Madrid
+https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=23d57fa19bfa7410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD
+
+- Historic of weather information from Madrid
+https://opendata.aemet.es/centrodedescargas/inicio
+
+- The info of traffic is trickier, aparently...
+http://informo.munimadrid.es/informo/tmadrid/
+
+
 
 ########################################################################################################
 ######################             Hacer webscrapping diario               #############################
