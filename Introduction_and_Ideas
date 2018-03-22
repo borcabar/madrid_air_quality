@@ -1,4 +1,4 @@
-Elements of the application:
+hElements of the application:
 
 In the front:
 1- Dash board of pollution in madrid, customizable to a point, maybe a neigborhood.
@@ -44,10 +44,10 @@ http://www.mambiente.munimadrid.es/opencms/opencms/calaire/SistemaIntegral/SistV
 ######################             Hacer webscrapping diario               #############################
 ########################################################################################################
 
-#Información diaria sobre los contaminantes de las diferentes estaciones del ayuntameinto de madrid
+# Air quality hourly data from Madrid
 http://www.mambiente.munimadrid.es/sica/scripts/index.php?menu=consulta&smenu=reports&link=data
 
-# Informacion de la temperatura en MAdrid
+# Weather information from Madrid
 http://www.aemet.es/es/eltiempo/prediccion/municipios/madrid-id28079
 
 #Información sobre el tráfico de Madrid
@@ -70,6 +70,5 @@ better an horizontal plane depending of the density of the neigborhoud.
 
 - If the lastest is implemented the summer will give and excellent opportunity to calibrate the influence of cars, ignoring the 
 effect of heating systems.
-
 
 
