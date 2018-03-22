@@ -17,6 +17,11 @@ In the mathematics
 (day of the week, vacation time, holyday, etc...). This will be quit challenging:
 
 
+########################################################################################################
+######################              Data bases, historic info              #############################
+########################################################################################################
+
+
 The data:
 - For the pollution in MAdrid should access:
 https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=aecb88a7e2b73410VgnVCM2000000c205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD
@@ -33,6 +38,22 @@ https://opendata.aemet.es/centrodedescargas/inicio
 
 - A description of the air's measurement in amdrid is found here:
 http://www.mambiente.munimadrid.es/opencms/opencms/calaire/SistemaIntegral/SistVigilancia/Estaciones/
+
+
+########################################################################################################
+######################             Hacer webscrapping diario               #############################
+########################################################################################################
+
+#Información diaria sobre los contaminantes de las diferentes estaciones del ayuntameinto de madrid
+http://www.mambiente.munimadrid.es/sica/scripts/index.php?menu=consulta&smenu=reports&link=data
+
+# Informacion de la temperatura en MAdrid
+http://www.aemet.es/es/eltiempo/prediccion/municipios/madrid-id28079
+
+#Información sobre el tráfico de Madrid
+
+
+
 
 
 After talk with professor Mario Castro, there was two good ideas to implement.
