@@ -60,6 +60,9 @@ http://www.mambiente.munimadrid.es/sica/scripts/index.php?menu=consulta&smenu=re
 # Weather information from Madrid
 http://www.aemet.es/es/eltiempo/prediccion/municipios/madrid-id28079
 
+## Éste es mejor, viene como <xml>
+http://www.aemet.es/xml/municipios/localidad_28079.xml
+
 #Información sobre el tráfico de Madrid
 
 
