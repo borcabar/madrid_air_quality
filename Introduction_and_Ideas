@@ -82,3 +82,18 @@ better an horizontal plane depending of the density of the neigborhoud.
 effect of heating systems.
 
 
+
+
+
+
+########################################################################################################
+########################             Container Environment               ###############################
+########################################################################################################
+
+
+## Webscraper ------------------------------------------------------------------------------------------
+
+#- Python, and some librareis, including Selenium, time, random, datetimes, etc..
+#- Chrome, with his webdriver
+
+
