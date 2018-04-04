@@ -1,0 +1,135 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 13 01:36:54 2018
+
+@author: borisca
+"""
+
+#####################################################################
+########################   Libraries    #############################
+#####################################################################
+
+import pandas as pd
+import numpy as np
+import glob, os
+import csv 
+
+#####################################################################
+#################   Necesary lists of values  #######################
+#####################################################################
+
+## Lists of pollutants --------------------------------------------------------
+
+pollu=[[01, 'Dióxido de Azufre', 'SO2', 'μg/m3'],[06, 'Monóxido de Carbono', 'CO', 'mg/m3'],
+       [07, 'Monóxido de Nitrógeno', 'NO', 'μg/m3'],[8, 'Dióxido de Nitrógeno', 'NO2', 'μg/m3'],
+       [9, 'Partículas < 2.5μm', 'PM2.5', 'μg/m3'],[10, 'Partículas < 10 μm', 'PM10', 'μg/m3'],
+       [12, 'Óxidos de Nitrógeno', 'NOx', 'μg/m3'],[14, 'Ozono', 'O3', 'μg/m3'],
+       [20, 'Tolueno', 'TOL', 'μg/m3'],[30, 'Benceno', 'BEN', 'μg/m3'],
+       [35, 'Etilbenceno', 'EBE', 'μg/m3'],[37, 'Metaxileno', 'MXY', 'μg/m3'],
+       [38, 'Paraxileno', 'PXY', 'μg/m3'],[39, 'Ortoxileno', 'OXY', 'μg/m3'],
+       [42, 'Hidrocarburos totales', 'TCH', 'mg/m3'],[43, 'Metano', 'CH4', 'mg/m3'],
+       [44, 'Hidrocarburos no metánicos (hexano)', 'NMHC', 'mg/m3']]
+
+cod_sta=[i[0] for i in sta]   
+
+
+## List of Stations with code -------------------------------------------------
+
+sta=[[28079004, 'Plaza España', 'CodNu'], [28079008, 'Escuelas Aguirre', 'CodNu'],
+     [28079011, 'Avda. Ramon y Cajal', 'CodNu'],[28079016, 'Arturo Soria', 'CodNu'],
+     [28079017, 'Villaverde', 'CodNu'],[28079018, 'Farolillo', 'CodNu'],
+     [28079024, 'Casa de Campo', 'CodNu'],[28079027, 'Barajas Pueblo', 'CodNu'],
+     [28079035, 'Plaza del Carmen', 'CodNu'],[28079036, 'Moratalaz', 'CodNu'],
+     [28079038, 'Cuatro Caminos', 'CodNu'],[28079039, 'Barrio del Pilar', 'CodNu'],
+     [28079040, 'Puente de Vallecas', 'CodNu'],[28079047, 'Mendez Alvaro', 'CodNu'],
+     [28079048, 'Castellana', 'CodNu'],[28079049, 'Retiro', 'CodNu'],
+     [28079050, 'Plaza de Castilla', 'CodNu'],[28079054, 'Ensanche de Vallecas', 'CodNu'],
+     [28079055, 'Urbanizacion Embajada', 'CodNu'],[28079056, 'Fernandez Ladreda', 'CodNu'],
+     [28079057, 'Sanchinarro', 'CodNu'],[28079058, 'El Pardo', 'CodNu'],
+     [28079059, 'Juan Carlos I', 'CodNu'],[28079060, 'Tres Olivos', 'CodNu']]
+
+
+
+
+
+
+
+
+#####################################################################
+#####################     Uploading Data    #########################
+#####################################################################
+
+
+
+## Adding all the values ofdata from 2008 to today (2018)
+arc=[]
+j=0
+for i in range(2008,2019):
+    path="/Users/borisca/Documents/Proyectos/Calidad_Aire_Madrid/datos/polucion_hora/Anio"+str(i)
+    os.chdir(path)
+    for file in glob.glob("*.txt"):
+        fi=open(file,'r')
+        fi1=csv.reader(fi,delimiter='V')
+        for row in fi1:
+            if len(row)==25:
+                arc.append(row)
+            j+=1
+len(arc)
+
+res=pd.DataFrame(arc)
+
+#assigning name to the columns
+# Split the data in the columns i need
+res.columns=['f','2h','3h','4h','5h','6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h','17h','18h','19h','20h','21h','22h','23h','24h','delete']
+res=res.drop('delete',1)
+
+res.shape
+
+res['Stat'] = res['f'].map(lambda x: x[0:8])
+res['pollu'] = res['f'].map(lambda x: x[8:10])
+res['hourly'] = res['f'].map(lambda x: x[12:14])
+res['date'] = res['f'].map(lambda x:x[14:20])
+res['date']=pd.to_datetime(res['date'],format='%y%m%d',errors='coerce')
+res['1h'] = res['f'].map(lambda x: x[20:25])
+
+res1=res
+
+##Need to clean everything
+res1=res1.drop('f',1)
+res1=res1[res1.hourly == '02'] # Delete any rows that isn´t hourly
+res1=res1[res1.date.notnull()] # Deleting every row with unknown date
+
+# i am interested into station that still are working
+res1['Stat'] = res1['Stat'].astype('i')
+res1=res1[res1['Stat'].isin(cod_sta)]
+
+res1.head(4)
+
+#Making the tables for the pollutants of interest
+res1['pollu'] = res1['pollu'].astype('i')
+SO2=res1[res1.pollu==01]
+CO=res1[res1.pollu==06]
+NO=res1[res1.pollu==07]
+NO2=res1[res1.pollu==8]
+NOx=res1[res1.pollu==12]
+PM25=res1[res1.pollu==9]
+PM10=res1[res1.pollu==10]
+THC=res1[res1.pollu==42]
+
+
+SO2.shape[0]+CO.shape[0]+NO.shape[0]+NO2.shape[0]+NOx.shape[0]+PM25.shape[0]+PM10.shape[0]+THC.shape[0]
+ 
+# To save the results as file.csv
+path='/Users/borisca/Documents/Proyectos/Calidad_Aire_Madrid/clean_data'
+
+os.chdir(path)
+
+SO2.to_csv('SO2', sep=';', encoding='utf-8',index=False)
+CO.to_csv('CO', sep=';', encoding='utf-8',index=False)
+NO.to_csv('NO', sep=';', encoding='utf-8',index=False)
+NO2.to_csv('NO2', sep=';', encoding='utf-8',index=False)
+NOx.to_csv('NOx', sep=';', encoding='utf-8',index=False)
+PM25.to_csv('PM25', sep=';', encoding='utf-8',index=False)
+PM10.to_csv('PM10', sep=';', encoding='utf-8',index=False)
+THC.to_csv('THC', sep=';', encoding='utf-8',index=False)
