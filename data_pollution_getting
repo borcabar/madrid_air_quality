@@ -1,0 +1,169 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 24 08:13:55 2018
+
+@author: borisca
+"""
+
+from selenium import webdriver
+import datetime
+import numpy as np
+
+dat1=datetime.datetime.today().strftime('%d/%m/%Y')
+dat1
+
+
+
+
+
+def stat_data(date_int,stat):
+    
+
+path_to_chromedriver = '/Applications/chromedriver' # change path as needed
+browser = webdriver.Chrome(executable_path = path_to_chromedriver)
+
+url = 'http://www.mambiente.munimadrid.es/sica/scripts/index.php?menu=consulta&smenu=reports&link=data'
+browser.get(url)
+
+
+## Finding the data from station and date -------------------------------------
+
+#Seen the html code this is the place where the station are set
+browser.find_element_by_id('station').send_keys('Escuelas Aguirre')
+
+#With this you cna put the data you wish
+browser.find_element_by_id('date').send_keys('12/03/2018')
+
+#This shoul be to accept the querry
+browser.find_element_by_css_selector('input[type=\"submit\"]').click()
+
+
+
+
+
+## Uploading the information formerly mentioned -------------------------------
+dat=[]
+dat1=[]
+dat1=browser.find_elements_by_xpath("//td[@class='hd']")
+dat=browser.find_elements_by_xpath("//td[@class='datos']")
+
+#Shall i to make a table with date, hour, station, and pollutant code... 
+# for this i need to match the names with the codes of the pollutnts
+print(dat1[0].text)
+
+len(dat1)
+
+
+## Code and name of the different stations in the city
+
+## close the b
+browser.quit()
+
+
+sta_names=((4, "Plaza España" ),(8, "Escuelas Aguirre" ),(11, "Avda. Ramon y Cajal" ),(16, "Arturo Soria" ),(17, "Villaverde" ),(18, "Farolillo" ),(24, "Casa de Campo" ),(27, "Barajas Pueblo" ),(35, "Plaza del Carmen" ),(36, "Moratalaz" ),(38, "Cuatro Caminos" ),(39, "Barrio del Pilar" ),(40, "Puente de Vallecas" ),(47, "Mendez Alvaro" ),(48, "Castellana" ),(49, "Retiro" ),(50, "Plaza de Castilla" ),(54, "Ensanche de Vallecas" ),(55, "Urbanizacion Embajada" ),(56, "Fernandez Ladreda" ),(57, "Sanchinarro" ),(58, "El Pardo" ),(59, "Juan Carlos I" ),(60, "Tres Olivos"))
+
+# a list of the codes of stations
+[i[0] for i in sta_names]
+
+# a list of the names of stations
+[i[1] for i in sta_names]
+
+
+
+
+###############################################################################
+############    Application to retrieve the pollution info   ##################
+###############################################################################
+
+
+## Libraries ------------------------------------------------------------------
+
+from selenium import webdriver
+import datetime
+import time
+import random
+
+
+
+
+
+
+## Variables ------------------------------------------------------------------
+
+## Stations name's
+sta_names=((4, "Plaza España" ),(8, "Escuelas Aguirre" ),(11, "Avda. Ramon y Cajal" ),
+           (16, "Arturo Soria" ),(17, "Villaverde" ),(18, "Farolillo" ),
+           (24, "Casa de Campo" ),(27, "Barajas Pueblo" ),(35, "Plaza del Carmen" ),
+           (36, "Moratalaz" ),(38, "Cuatro Caminos" ),(39, "Barrio del Pilar" ),
+           (40, "Puente de Vallecas" ),(47, "Mendez Alvaro" ),(48, "Castellana" ),
+           (49, "Retiro" ),(50, "Plaza de Castilla" ),(54, "Ensanche de Vallecas" ),
+           (55, "Urbanizacion Embajada" ),(56, "Fernandez Ladreda" ),
+           (57, "Sanchinarro" ),(58, "El Pardo" ),(59, "Juan Carlos I" ),(60, "Tres Olivos"))
+# a list of the names of stations
+stations=[i[1] for i in sta_names]
+
+
+## the date of today in appropiate format
+dat1=datetime.datetime.today().strftime('%d/%m/%Y')
+
+## Func retrieve info from every stations -------------------------------------
+
+
+def stats_data(date1):    
+    path_to_chromedriver = '/Applications/chromedriver' # change path as needed
+    browser = webdriver.Chrome(executable_path = path_to_chromedriver)
+    # Define the url
+    url = 'http://www.mambiente.munimadrid.es/sica/scripts/index.php?menu=consulta&smenu=reports&link=data'
+
+    for i in sta_names:
+        
+        browser.get(url)  # open a new browser for each search
+        #Seen the html code this is the place where the station are set
+        browser.find_element_by_id('station').send_keys(i[1])
+        #With this you cna put the data you wish
+        browser.find_element_by_id('date').send_keys(date1)
+        #This shoul be to accept the querry
+        browser.find_element_by_css_selector('input[type=\"submit\"]').click()
+        
+        #-----------------------------------------------
+        ##Get the info from the table
+        
+        seconds = 2 + (random.random() * 2)
+        time.sleep(seconds)    
+    
+    ## To close the browser
+    browser.quit()    
+    
+## Lists of pollutants --------------------------------------------------------
+
+pollu=[[01, 'Dióxido de Azufre', 'SO2', 'μg/m3'],[06, 'Monóxido de Carbono', 'CO', 'mg/m3'],
+       [07, 'Monóxido de Nitrógeno', 'NO', 'μg/m3'],[8, 'Dióxido de Nitrógeno', 'NO2', 'μg/m3'],
+       [9, 'Partículas < 2.5μm', 'PM2.5', 'μg/m3'],[10, 'Partículas < 10 μm', 'PM10', 'μg/m3'],
+       [12, 'Óxidos de Nitrógeno', 'NOx', 'μg/m3'],[14, 'Ozono', 'O3', 'μg/m3'],
+       [20, 'Tolueno', 'TOL', 'μg/m3'],[30, 'Benceno', 'BEN', 'μg/m3'],
+       [35, 'Etilbenceno', 'EBE', 'μg/m3'],[37, 'Metaxileno', 'MXY', 'μg/m3'],
+       [38, 'Paraxileno', 'PXY', 'μg/m3'],[39, 'Ortoxileno', 'OXY', 'μg/m3'],
+       [42, 'Hidrocarburos totales', 'TCH', 'mg/m3'],[43, 'Metano', 'CH4', 'mg/m3'],
+       [44, 'Hidrocarburos no metánicos (hexano)', 'NMHC', 'mg/m3']]
+
+np.array(pollu)    
+
+
+## List of Stations with code -------------------------------------------------
+
+sta=[[28079004, 'Plaza España', 'CodNu'], [28079008, 'Escuelas Aguirre', 'CodNu'],
+     [28079011, 'Avda. Ramon y Cajal', 'CodNu'],[28079016, 'Arturo Soria', 'CodNu'],
+     [28079017, 'Villaverde', 'CodNu'],[28079018, 'Farolillo', 'CodNu'],
+     [28079024, 'Casa de Campo', 'CodNu'],[28079027, 'Barajas Pueblo', 'CodNu'],
+     [28079035, 'Plaza del Carmen', 'CodNu'],[28079036, 'Moratalaz', 'CodNu'],
+     [28079038, 'Cuatro Caminos', 'CodNu'],[28079039, 'Barrio del Pilar', 'CodNu'],
+     [28079040, 'Puente de Vallecas', 'CodNu'],[28079047, 'Mendez Alvaro', 'CodNu'],
+     [28079048, 'Castellana', 'CodNu'],[28079049, 'Retiro', 'CodNu'],
+     [28079050, 'Plaza de Castilla', 'CodNu'],[28079054, 'Ensanche de Vallecas', 'CodNu'],
+     [28079055, 'Urbanizacion Embajada', 'CodNu'],[28079056, 'Fernandez Ladreda', 'CodNu'],
+     [28079057, 'Sanchinarro', 'CodNu'],[28079058, 'El Pardo', 'CodNu'],
+     [28079059, 'Juan Carlos I', 'CodNu'],[28079060, 'Tres Olivos', 'CodNu']]
+np.array(sta)
+
+[i[0] for i in sta]
